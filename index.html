@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ABC & 123 শিখি 🌟 - বাচ্চাদের লার্নিং অ্যাপ</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <!-- Stars background -->
+  <div class="stars" id="stars"></div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">🌟 ABC & 123 শিখি</div>
+      <div class="score-box">⭐ পয়েন্ট: <strong id="score">0</strong></div>
+    </div>
+  </header>
+
+  <!-- Main Mode Switcher -->
+  <div class="mode-switcher">
+    <button class="mode-btn active" id="modeAlpha" onclick="switchMode('alpha')">🔤 অক্ষর</button>
+    <button class="mode-btn" id="modeNum" onclick="switchMode('num')">🔢 সংখ্যা</button>
+  </div>
+
+  <!-- Sub Nav Tabs -->
+  <nav class="nav-tabs" id="navTabs">
+    <button class="tab-btn active" id="tabLearn" onclick="showTab('learn')">📖 শিখি</button>
+    <button class="tab-btn" id="tabQuiz"  onclick="showTab('quiz')">🎯 কুইজ</button>
+    <button class="tab-btn" id="tabSong"  onclick="showTab('song')">🎵 গান</button>
+  </nav>
+
+  <!-- ===================== ALPHABET MODE ===================== -->
+  <div id="alphaMode">
+
+    <!-- LEARN -->
+    <section class="tab-content active" id="tab-learn">
+      <h2 class="section-title">অ্যালফাবেট শিখি! 🦋</h2>
+      <div class="alphabet-grid" id="alphabetGrid"></div>
+    </section>
+
+    <!-- QUIZ -->
+    <section class="tab-content" id="tab-quiz">
+      <h2 class="section-title">কুইজ খেলি! 🎮</h2>
+      <div class="quiz-box">
+        <div class="quiz-question" id="quizQuestion">কোন অক্ষর দিয়ে শুরু?</div>
+        <div class="quiz-emoji" id="quizEmoji">🍎</div>
+        <div class="quiz-options" id="quizOptions"></div>
+        <div class="quiz-result" id="quizResult"></div>
+      </div>
+    </section>
+
+    <!-- SONG -->
+    <section class="tab-content" id="tab-song">
+      <h2 class="section-title">ABC গান শুনি! 🎵</h2>
+      <div class="song-box">
+        <div class="song-display" id="songDisplay"></div>
+        <div class="song-controls">
+          <button class="song-btn" id="playSongBtn" onclick="toggleSong()">▶️ গান শুরু</button>
+        </div>
+        <div class="song-current" id="currentLetter"></div>
+      </div>
+    </section>
+
+  </div><!-- /alphaMode -->
+
+  <!-- ===================== NUMBER MODE ===================== -->
+  <div id="numMode" style="display:none">
+
+    <!-- LEARN Numbers -->
+    <section class="tab-content active" id="tab-num-learn">
+      <h2 class="section-title">সংখ্যা শিখি! 🔢</h2>
+      <div class="alphabet-grid" id="numberGrid"></div>
+    </section>
+
+    <!-- QUIZ Numbers -->
+    <section class="tab-content" id="tab-num-quiz">
+      <h2 class="section-title">সংখ্যা কুইজ! 🎯</h2>
+      <div class="quiz-box">
+        <div class="quiz-question" id="numQuizQuestion">কতটি আছে?</div>
+        <div class="quiz-emoji" id="numQuizEmoji" style="font-size:3.5rem;line-height:1.4;margin:12px 0;min-height:80px"></div>
+        <div class="quiz-options" id="numQuizOptions"></div>
+        <div class="quiz-result" id="numQuizResult"></div>
+      </div>
+    </section>
+
+    <!-- Count Song -->
+    <section class="tab-content" id="tab-num-song">
+      <h2 class="section-title">গণনা গান! 🎵</h2>
+      <div class="song-box">
+        <div class="song-display" id="numSongDisplay"></div>
+        <div class="song-controls">
+          <button class="song-btn" id="playNumSongBtn" onclick="toggleNumSong()">▶️ গান শুরু</button>
+        </div>
+        <div class="song-current" id="currentNumber"></div>
+      </div>
+    </section>
+
+  </div><!-- /numMode -->
+
+  <!-- ===== SHARED MODAL (Letter or Number) ===== -->
+  <div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
+    <div class="modal-card" id="modalCard" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div class="modal-letter" id="modalLetter"></div>
+      <div class="modal-letter-lower" id="modalLetterLower"></div>
+      <div class="modal-emoji" id="modalEmoji"></div>
+      <div class="modal-word" id="modalWord"></div>
+      <div class="modal-pronunciation" id="modalPronunciation"></div>
+      <!-- Number dots display -->
+      <div class="modal-dots" id="modalDots"></div>
+      <button class="modal-speak-btn" id="modalSpeakBtn">🔊 শুনি</button>
+      <div class="modal-nav">
+        <button onclick="navigateItem(-1)">◀ আগের</button>
+        <button onclick="navigateItem(1)">পরের ▶</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confetti canvas -->
+  <canvas id="confettiCanvas"></canvas>
+
+  <script src="app.js"></script>
+</body>
+</html>
