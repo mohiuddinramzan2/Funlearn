@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ABC & 123 শিখি 🌟 - বাচ্চাদের লার্নিং অ্যাপ</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <!-- Stars background -->
+  <div class="stars" id="stars"></div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">🌟 ABC & 123 শিখি</div>
+      <div class="score-box">⭐ পয়েন্ট: <strong id="score">0</strong></div>
+    </div>
+  </header>
+
+  <!-- Main Mode Switcher -->
+  <div class="mode-switcher">
+    <button class="mode-btn active" id="modeAlpha" onclick="switchMode('alpha')">🔤 অক্ষর</button>
+    <button class="mode-btn" id="modeNum" onclick="switchMode('num')">🔢 সংখ্যা</button>
+  </div>
+
+  <!-- Sub Nav Tabs -->
+  <nav class="nav-tabs" id="navTabs">
+    <button class="tab-btn active" id="tabLearn" onclick="showTab('learn')">📖 শিখি</button>
+    <button class="tab-btn" id="tabQuiz"  onclick="showTab('quiz')">🎯 কুইজ</button>
+    <button class="tab-btn" id="tabSong"  onclick="showTab('song')">🎵 গান</button>
+    <button class="tab-btn" id="tabWrite" onclick="showTab('write')">✏️ লিখি</button>
+  </nav>
+
+  <!-- ===================== ALPHABET MODE ===================== -->
+  <div id="alphaMode">
+
+    <!-- LEARN -->
+    <section class="tab-content active" id="tab-learn">
+      <h2 class="section-title">অ্যালফাবেট শিখি! 🦋</h2>
+      <div class="alphabet-grid" id="alphabetGrid"></div>
+    </section>
+
+    <!-- QUIZ -->
+    <section class="tab-content" id="tab-quiz">
+      <h2 class="section-title">কুইজ খেলি! 🎮</h2>
+      <div class="quiz-box">
+        <div class="quiz-question" id="quizQuestion">কোন অক্ষর দিয়ে শুরু?</div>
+        <div class="quiz-emoji" id="quizEmoji">🍎</div>
+        <div class="quiz-options" id="quizOptions"></div>
+        <div class="quiz-result" id="quizResult"></div>
+      </div>
+    </section>
+
+    <!-- SONG -->
+    <section class="tab-content" id="tab-song">
+      <h2 class="section-title">ABC গান শুনি! 🎵</h2>
+      <div class="song-box">
+        <div class="song-display" id="songDisplay"></div>
+        <div class="song-controls">
+          <button class="song-btn" id="playSongBtn" onclick="toggleSong()">▶️ গান শুরু</button>
+        </div>
+        <div class="song-current" id="currentLetter"></div>
+      </div>
+    </section>
+
+    <!-- WRITE — Alphabet -->
+    <section class="tab-content" id="tab-write">
+      <h2 class="section-title">লিখে শিখি! ✏️</h2>
+      <div class="write-container">
+
+        <!-- অক্ষর সিলেক্টর -->
+        <div class="write-selector" id="alphaWriteSelector"></div>
+
+        <!-- ক্যানভাস বোর্ড -->
+        <div class="canvas-wrapper">
+          <div class="guide-letter" id="alphaGuideLetter">A</div>
+          <canvas id="alphaCanvas" width="340" height="340"></canvas>
+        </div>
+
+        <!-- কন্ট্রোল -->
+        <div class="write-controls">
+          <button class="ctrl-btn clear-btn" onclick="clearActiveCanvas()">🗑️ মুছি</button>
+          <button class="ctrl-btn check-btn" onclick="praiseKid()">⭐ শাবাশ!</button>
+          <div class="brush-row">
+            <label>কলমের মাপ:</label>
+            <input type="range" id="alphaBrushSize" min="6" max="32" value="16"
+                   oninput="updateBrushLabel('alpha', this.value)">
+            <span id="alphaBrushLabel" class="brush-label">16</span>
+          </div>
+          <div class="color-picker-row" id="alphaColorRow"></div>
+        </div>
+
+        <div class="praise-msg" id="praiseMsgAlpha"></div>
+      </div>
+    </section>
+
+  </div><!-- /alphaMode -->
+
+  <!-- ===================== NUMBER MODE ===================== -->
+  <div id="numMode" style="display:none">
+
+    <!-- LEARN Numbers -->
+    <section class="tab-content active" id="tab-num-learn">
+      <h2 class="section-title">সংখ্যা শিখি! 🔢</h2>
+      <div class="alphabet-grid" id="numberGrid"></div>
+    </section>
+
+    <!-- QUIZ Numbers -->
+    <section class="tab-content" id="tab-num-quiz">
+      <h2 class="section-title">সংখ্যা কুইজ! 🎯</h2>
+      <div class="quiz-box">
+        <div class="quiz-question" id="numQuizQuestion">কতটি আছে?</div>
+        <div class="quiz-emoji" id="numQuizEmoji" style="font-size:3.5rem;line-height:1.4;margin:12px 0;min-height:80px"></div>
+        <div class="quiz-options" id="numQuizOptions"></div>
+        <div class="quiz-result" id="numQuizResult"></div>
+      </div>
+    </section>
+
+    <!-- Count Song -->
+    <section class="tab-content" id="tab-num-song">
+      <h2 class="section-title">গণনা গান! 🎵</h2>
+      <div class="song-box">
+        <div class="song-display" id="numSongDisplay"></div>
+        <div class="song-controls">
+          <button class="song-btn" id="playNumSongBtn" onclick="toggleNumSong()">▶️ গান শুরু</button>
+        </div>
+        <div class="song-current" id="currentNumber"></div>
+      </div>
+    </section>
+
+    <!-- WRITE — Numbers -->
+    <section class="tab-content" id="tab-num-write">
+      <h2 class="section-title">সংখ্যা লিখি! ✏️</h2>
+      <div class="write-container">
+
+        <!-- সংখ্যা সিলেক্টর -->
+        <div class="write-selector" id="numWriteSelector"></div>
+
+        <!-- ক্যানভাস বোর্ড -->
+        <div class="canvas-wrapper">
+          <div class="guide-letter" id="numGuideLetter">1</div>
+          <canvas id="numCanvas" width="340" height="340"></canvas>
+        </div>
+
+        <!-- কন্ট্রোল -->
+        <div class="write-controls">
+          <button class="ctrl-btn clear-btn" onclick="clearActiveCanvas()">🗑️ মুছি</button>
+          <button class="ctrl-btn check-btn" onclick="praiseKid()">⭐ শাবাশ!</button>
+          <div class="brush-row">
+            <label>কলমের মাপ:</label>
+            <input type="range" id="numBrushSize" min="6" max="32" value="16"
+                   oninput="updateBrushLabel('num', this.value)">
+            <span id="numBrushLabel" class="brush-label">16</span>
+          </div>
+          <div class="color-picker-row" id="numColorRow"></div>
+        </div>
+
+        <div class="praise-msg" id="praiseMsgNum"></div>
+      </div>
+    </section>
+
+  </div><!-- /numMode -->
+
+  <!-- ===== SHARED MODAL (Letter or Number) ===== -->
+  <div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
+    <div class="modal-card" id="modalCard" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div class="modal-letter" id="modalLetter"></div>
+      <div class="modal-letter-lower" id="modalLetterLower"></div>
+      <div class="modal-emoji" id="modalEmoji"></div>
+      <div class="modal-word" id="modalWord"></div>
+      <div class="modal-pronunciation" id="modalPronunciation"></div>
+      <div class="modal-dots" id="modalDots"></div>
+      <button class="modal-speak-btn" id="modalSpeakBtn">🔊 শুনি</button>
+      <div class="modal-nav">
+        <button onclick="navigateItem(-1)">◀ আগের</button>
+        <button onclick="navigateItem(1)">পরের ▶</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confetti canvas -->
+  <canvas id="confettiCanvas"></canvas>
+
+  <script src="app.js"></script>
+</body>
+</html>
