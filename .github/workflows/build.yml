@@ -35,7 +35,6 @@ jobs:
       run: |
         cat > main.py << 'EOF'
 from kivy.app import App
-from android.permissions import request_permissions, Permission
 from kivy.uix.widget import Widget
 from kivy.lang import Builder
 
@@ -62,7 +61,7 @@ package.domain = org.funlearn
 source.dir = .
 source.include_exts = py,png,jpg,kv,atlas
 version = 1.0
-requirements = python3,kivy,android
+requirements = python3,kivy
 android.permissions = INTERNET
 android.api = 33
 android.minapi = 21
